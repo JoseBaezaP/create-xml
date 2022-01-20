@@ -2,17 +2,26 @@
 
 class Emisor extends XML
 {
+    //En esta parte inicializo los atributos de manera más ordenada
 
-    public $regimenFiscal;
+    public $atributos = [
+        "Rfc" => '',
+        "Nombre" => '',
+        "RegimenFiscal" => ''
+    ];
 
-    protected function __construct()
+    public  $rules = [
+        "Rfc" => 'R',
+        "Nombre" => 'R',
+        "RegimenFiscal" => 'R'
+    ];
+
+    //En esta parte le paso los atributos que estan en el array del archivo index para setearlos en las key del array de atributos
+    function __construct($data)
     {
-        $this->atributos = [];
-        $this->atributos['Nombre'] = '';
-        $this->atributos['RegimenFiscal'] = '';
-        $this->rules = [];
-        $this->rules['Nombre'] = 'R';
-        $this->rules['RegimenFiscal'] = 'R';
+        foreach ($data as $key => $value) {
+            $this->atributos[$key] = $value;
+        }
     }
 
     public function getNode()
